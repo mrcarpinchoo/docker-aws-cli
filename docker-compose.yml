@@ -1,8 +1,8 @@
 services:
   aws-cli:
     image: amazon/aws-cli:latest
-    stdin_open: true
-    tty: true
-    entrypoint: ["sh"]
+    working_dir: /workspace
+    entrypoint: ["tail", "-f", "/dev/null"]
+    volumes:
     env_file:
       - .env
