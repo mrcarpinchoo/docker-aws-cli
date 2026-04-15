@@ -1,0 +1,8 @@
+services:
+  aws-cli:
+    image: amazon/aws-cli:latest
+    stdin_open: true
+    tty: true
+    entrypoint: ["sh"]
+    env_file:
+      - .env
