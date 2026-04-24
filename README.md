@@ -9,7 +9,6 @@ You can drop into an interactive shell or run one-off AWS commands via `docker e
 - `image`: uses the official AWS CLI Docker image.
 - `entrypoint`: overrides the default entrypoint with `tail -f /dev/null` to keep the container alive.
 - `working_dir`: sets `/workspace` as the default directory inside the container.
-- `volumes`: mount local directories into the container as needed.
 - `env_file`: loads AWS credentials and configuration from a `.env` file.
 
 ## Environment Variables
@@ -52,6 +51,24 @@ Run AWS commands directly:
 - `docker exec <container-name> aws sts get-caller-identity`
 - `docker exec <container-name> aws ec2 describe-instances`
 
+### Mounting a Volume
+
+To give the container access to local files, add a `volumes` entry to `docker-compose.yml`:
+
+```yaml
+services:
+  aws-cli:
+    image: amazon/aws-cli:latest
+    working_dir: /workspace
+    entrypoint: ["tail", "-f", "/dev/null"]
+    volumes:
+      - ./:/workspace
+    env_file:
+      - .env
+```
+
+This mounts `./` from the host into `/workspace` inside the container.
+
 ---
 
 > **Note**: Stop and remove the container with `docker compose down`.
@@ -61,4 +78,3 @@ Run AWS commands directly:
 - Ideal for local development and learning.
 - No need to install AWS CLI locally.
 - The container stays running until you stop it.
-- Add volume mounts in `docker-compose.yml` to give the container access to local files.

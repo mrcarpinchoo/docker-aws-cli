@@ -3,6 +3,5 @@ services:
     image: amazon/aws-cli:latest
     working_dir: /workspace
     entrypoint: ["tail", "-f", "/dev/null"]
-    volumes:
     env_file:
       - .env
