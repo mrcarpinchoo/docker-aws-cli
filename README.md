@@ -69,9 +69,15 @@ services:
 
 This mounts `./` from the host into `/workspace` inside the container.
 
+To mount as read-only, append `:ro` to the volume entry:
+
+```yaml
+      - ./:/workspace:ro
+```
+
 ---
 
-> **Note**: Stop and remove the container with `docker compose down`.
+> **Note**: Stop and remove the container with `docker compose down -v`.
 
 ## Notes
 
