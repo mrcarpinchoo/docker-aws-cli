@@ -75,9 +75,25 @@ To mount as read-only, append `:ro` to the volume entry:
       - ./:/workspace:ro
 ```
 
+### Custom Docker Compose
+
+To customize the setup without affecting the committed configuration, copy the base file and modify the copy:
+
+```sh
+cp docker-compose.yml docker-compose-dev.yml
+```
+
+Then start it with:
+
+```sh
+docker compose -f docker-compose-dev.yml up -d
+```
+
+There is a `docker-compose-dev.yml` entry in the .gitignore, so local changes will not be tracked.
+
 ---
 
-> **Note**: Stop and remove the container with `docker compose down -v`.
+> **Note**: Stop and remove the container with `docker compose down -v`. If using a custom compose file, specify it: `docker compose -f docker-compose-dev.yml down -v`.
 
 ## Notes
 
